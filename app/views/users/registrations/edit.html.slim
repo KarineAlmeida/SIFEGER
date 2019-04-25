@@ -1,0 +1,10 @@
+h2
+  | Editar credenciais
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = f.input :name
+    = f.input :email
+    = f.input :password, hint: "(deixe em branco caso não pretenda muda-la)"
+    = f.input :password_confirmation, autocomplete: "off"
+    = f.input :current_password, hint: "(Nós precisamos da sua senha atual para validar as alterações)"
+    = f.submit "Atualizar", class: 'btn btn-primary'

@@ -1,0 +1,10 @@
+= content_for :current_menu do 'project' end
+div
+  .page-title
+    .title_left
+      h3 Editar projeto
+  .row
+    .col-md-12
+      .x_panel
+        .x_content style=("display: block;")
+          = render 'form'

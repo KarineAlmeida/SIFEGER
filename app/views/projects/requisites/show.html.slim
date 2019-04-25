@@ -1,0 +1,29 @@
+= content_for :current_menu do 'requisite' end
+.row
+  .col-md-12
+    .row
+      .col-md-6
+        .list-item
+          .list-item-field Data da versão
+          .list-item-value.created_at = @requisite.decorate.created_at
+        .list-item
+          .list-item-field Estado
+          .list-item-value.state = @requisite.decorate.state
+        .list-item
+          .list-item-field Título
+          .list-item-value.title = @requisite.title
+        .list-item
+          .list-item-field Sigla
+          .list-item-value.slg = @requisite.slg
+        .list-item
+          .list-item-field Descrição
+          .list-item-value.description.text-justify = @requisite.description
+        .list-item
+          .list-item-field Tipo
+          .list-item-value.kind = @requisite.decorate.kind
+        .list-item
+          .list-item-field Prioridade
+          .list-item-value.priority = @requisite.decorate.priority
+        .list-item
+          .list-item-field Responsável
+          .list-item-value.responsable = @requisite.decorate.responsable_name

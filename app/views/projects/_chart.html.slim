@@ -1,0 +1,17 @@
+.row
+  .col-md-6
+    .x_panel.tile
+      .x_title DISTRIBUIÇÃO DOS ESTADOS
+      .x_content
+        canvas#status-info width='600' height='400' data-data="#{project.chart_control.statuses_chart}"
+  .col-md-6
+    .x_panel.tile
+      .x_title DISTRIBUIÇÃO DE VERSÔES
+      .x_content
+        canvas#changes-history width='600' height='400' data-data="#{project.chart_control.changes_history}"
+.row
+  .col-md-6
+    .x_panel.tile
+      .x_title REQUISITOS / RESPONSÁVEIS
+      .x_content
+        canvas#requisite-by-responsible width='600' height='400' data-data="#{project.chart_control.requisites_by_responsable}"

@@ -1,0 +1,18 @@
+= content_for :current_menu do 'requisite' end
+.container.mt-5.mb-5
+  .row
+    .col-md-9
+      h4.timeline Histórico de versões
+      ul.timeline
+        - @versions.each do |version|
+          li
+            .timeline.fa.fa-fw class=(requisite_log_icon_class(version.requisite_log.kind))
+            span = version.requisite_log.title
+            .float-right
+              span = l(version.created_at, format: :short)
+              a data-toggle='tooltip' title="Exibir versão"
+                .fa.fa-info-circle.btn.btn-primary.btn-xs style="margin-left:15px;" data-target="#requisite-info" data-toggle="modal" data-json="#{version.decorate_requisite.json}"
+            - version.requisite_log.content.each do |key, value|
+              p = value.html_safe
+
+= render partial: 'shared/modals/requisite_info'

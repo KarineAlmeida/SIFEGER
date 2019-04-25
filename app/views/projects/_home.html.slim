@@ -1,0 +1,85 @@
+.row
+  .col-md-12
+    .x_panel
+      .x_content
+        .col-md-12.col-sm-9.col-xs-12
+          ul.stats-overview
+            li
+              span.name Membros
+              span.value = project.users.count
+            li
+              span.name Requisitos
+              span.value = project.requisites.count
+            li
+              - if project.flow_service.can_finish?
+                span style="position: absolute;right: 6px;top: 1px;"
+                  = link_to project_statuses_path(project), class: 'btn btn-success',
+                    data: { confirm: 'Deseja finalizar o projeto?' }, method: :patch do
+                    i.fa.fa-check &nbsp; Finalizar projeto
+
+              span.name Percentual de conclusão
+              span.value = project.flow_service.conclusion_percentage.to_s + ' %'
+          .row
+            .col-md-4
+              .project_detail
+                p.title Dono
+                p = project.owner.name
+              .project_detail
+                p.title Data de conclusão
+                p = project.conclusion_date.strftime('%d/%m/%Y')
+            .col-md-4
+              .project_detail
+                p.title Descrição
+                p = project.description
+            .col-md-4
+              .project_detail
+                p.title Email
+                p = project.email || 'Não informado'
+              .project_detail
+                p.title Site
+                p = project.site || 'Não informado'
+
+.row
+  .col-md-12
+    .x_panel
+      .x_title
+        h3 Últimos registros de alterações
+        .row
+          .col-md-12
+            ul.timeline
+              - project.requisite_versions.order('requisite_versions.created_at desc').limit(3).each do |version|
+                li
+                  .timeline.fa.fa-fw class=(requisite_log_icon_class(version.requisite_log.kind))
+                  span
+                    =<> "[#{version.requisite.title}]"
+                    = version.requisite_log.title
+                  .float-right
+                    span = l(version.created_at, format: :short)
+                  - version.requisite_log.content.each do |key, value|
+                    p = value.html_safe
+
+.row
+  .col-md-6.col-sm-6.col-xs-12
+    .x_panel
+      .x_title
+        h3
+          | Requisitos concluídos
+        .clearfix
+        ul.to_do
+          - project.flow_service.all_concluded_requisites.each do |requisite|
+            li style="background: #fafafa;"
+              span style="color: #4CAF50;"
+                i.fa.fa-fw.fa-check
+                = requisite.decorate.pretty_name
+  .col-md-6.col-sm-6.col-xs-12
+    .x_panel
+      .x_title
+        h3
+          | Requisitos rejeitados
+        .clearfix
+        ul.to_do
+          - project.flow_service.all_rejected_requisites.each do |requisite|
+            li style="background: #fafafa;"
+              span style="color: #f44336;"
+                i.fa.fa-fw.fa-check
+                = requisite.decorate.pretty_name

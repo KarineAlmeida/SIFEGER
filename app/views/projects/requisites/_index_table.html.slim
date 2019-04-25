@@ -1,0 +1,73 @@
+div style="position:absolute; top: 0px;right: 10px;"
+  - if can? :create, Requisite
+    = link_to new_project_requisite_path(current_user.current_project), class: 'btn btn-block btn-primary' do
+      i.fa.fa-plus &nbsp;  Criar requisito
+
+- if @requisites.any?
+  table.table.table-striped.requisites.datatable
+    thead
+      tr
+        th style=("width: 200px") Título
+        th Sigla
+        th Tipo
+        th Prioridade
+        th Estado
+        th Autor
+        th Responsável
+        th Criado em
+        th Última versão em
+        th style=("width: 200px") Ações
+
+    tbody
+      - @requisites.each do |requisite|
+        tr
+          td
+            = requisite.title
+          td
+            = requisite.slg
+          td
+            = requisite.kind
+          td
+            = I18n.t("views.requisite.priorities.#{requisite.priority}")
+          td
+            = requisite.decorate.state
+          td
+            = requisite.author.name
+          td
+            - if can? :set_responsable, Requisite
+              .btn.btn-xs.btn-default data-current="#{requisite.responsable.try(:id)}" data-target="#requisite-responsable" data-toggle="modal" data-form-action=project_requisite_responsable_path(requisite.project, requisite)
+                .fa.fa-fw.fa-pencil
+                span.current-responsable
+                  - if requisite.responsable
+                    =<> requisite.responsable.name
+                  - else
+                    =<> 'Selecione um responsável'
+            - else
+              .btn.btn-xs.btn-default
+                .fa.fa-fw.fa-pencil
+                span.current-responsable
+                  - if requisite.responsable
+                    =<> requisite.responsable.name
+                  - else
+                    =<> 'Não definido'
+
+          td
+            = requisite.decorate.created_at
+          td
+            = requisite.decorate.updated_at
+          td
+            - if can? :read, requisite
+              = link_to project_requisite_path(requisite.project, requisite), class: 'btn btn-info btn-xs', title: 'Visualizar', data: { toggle: 'tooltip' } do
+                i.fa.fa-fw.fa-eye
+            - if can? :update, requisite
+              = link_to new_project_requisite_versions_path(requisite.project, requisite), class: 'btn btn-info btn-xs', title: 'Editar', data: { toggle: 'tooltip' } do
+                i.fa.fa-fw.fa-pencil
+            - if can? :read, requisite
+              = link_to project_requisite_versions_path(requisite.project, requisite), class: 'btn btn-info btn-xs', title: 'Versões', data: { toggle: 'tooltip' } do
+                i.fa.fa-fw.fa-clone
+            - if can? :delete, requisite
+              = link_to project_requisite_path(requisite.project, requisite), class: 'btn btn-danger btn-xs', title: 'Remover',
+                method: :delete, data: { confirm: 'Deseja realmente excluir esse requisito? Todos os dados serão perdidos.', toggle: 'tooltip' } do
+                i.fa.fa-fw.fa-trash-o
+- else
+  h3 Não há requisitos cadastrados. Você pode cadastrar um novo requisito <strong>#{link_to 'clicando aqui', new_project_requisite_path(current_user.current_project)}</strong>

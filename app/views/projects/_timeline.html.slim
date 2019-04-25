@@ -1,0 +1,26 @@
+.row
+  .col-md-12
+    .x_panel
+      .x_title
+        h3 Últimos registros de alterações
+        .timeline-filters
+          .timeline-label
+            .fa.fa-fw.fa-filter
+            =<> 'Filtros'
+          select.select.form-control
+            option value="" Selecione um requisito.
+            - project.requisites.order(:title).each do |requisite|
+              option value="#{requisite.id}" = requisite.title
+        .row
+          .col-md-12
+            ul.timeline.js-timeline-with-filters style="margin-top: 60px;"
+              - project.requisite_versions.order('requisite_versions.created_at desc').each do |version|
+                li data-requisite-id="#{version.requisite.id}"
+                  .timeline.fa.fa-fw class=(requisite_log_icon_class(version.requisite_log.kind))
+                  span
+                    =<> "[#{version.requisite.title}]"
+                    = version.requisite_log.title
+                  .float-right
+                    span = l(version.created_at, format: :short)
+                  - version.requisite_log.content.each do |key, value|
+                    p = value.html_safe

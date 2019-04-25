@@ -1,0 +1,13 @@
+= simple_form_for responsable_choice_form, url: '', method: :patch, data: { remote: true } do |f|
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title Selecione o responsável
+      .modal-body
+        = f.input :responsable_id, as: :select,
+                  prompt: 'Selecione um responsável',
+                  label: 'Responsável',
+                  collection: responsable_choice_form.responsables
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" Fechar
+        button.btn.btn-primary type="submit" Salvar

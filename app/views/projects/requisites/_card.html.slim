@@ -1,0 +1,42 @@
+.card
+  .priority data-toggle="tooltip" title="Prioridade #{requisite.decorate.priority}" class=(requisite.priority)
+  .card-title.force-break-line data-toggle="tooltip" title="#{requisite.title}"
+    = requisite.title.truncate(40)
+  .card-content
+    - if can? :set_responsable, requisite
+      div data-current="#{requisite.responsable.try(:id)}" data-target="#requisite-responsable" data-toggle="modal" data-form-action=project_requisite_responsable_path(requisite.project, requisite)
+        - if requisite.responsable
+          = image_tag(requisite.responsable.decorate.gravatar_url, class: 'responsable-picture')
+        - else
+          = image_tag('https://image.flaticon.com/icons/svg/16/16909.svg', class: 'responsable-picture')
+    - else
+      div
+        - if requisite.responsable
+          = image_tag(requisite.responsable.decorate.gravatar_url, class: 'responsable-picture')
+        - else
+          = image_tag('https://image.flaticon.com/icons/svg/16/16909.svg', class: 'responsable-picture')
+
+  .card-footer
+    .label.label-default.kind
+      - if requisite.kind == 'Funcional'
+        span Funcional
+      - else
+        span Não funcional
+    .btn.btn-secondary.btn-xs.btn-requisite-info.right data-target="#requisite-info" data-toggle="modal" data-json="#{requisite.decorate.json}"
+      .fa.fa-fw.fa-info-circle
+    = link_to project_requisite_versions_path(requisite.project, requisite), class: 'btn btn-secondary btn-xs btn-requisite-info right-2' do
+      .fa.fa-fw.fa-clone
+    = link_to '', class: 'btn btn-secondary btn-xs btn-requisite-info right-3 disabled' do
+      .fa.fa-fw.fa-comments
+    .dropdown
+      - if can? :update_status, requisite
+        .btn.btn-secondary.btn-xs.btn-requisite-info.left data-toggle="dropdown" type="button"
+          .fa.fa-fw.fa-arrow-circle-right
+        .dropdown-menu
+          - requisite.available_state_actions.each do |status|
+            - translated_state = I18n.t(status, scope: 'views.requisite.states_action')
+            a.dropdown-item data-target="#requisite-alert-status-change" data-url="#{project_requisite_statuses_path(requisite.project, requisite, status: status)}" data-toggle="modal"
+              =<> "Mover para <strong>#{translated_state}</strong>".html_safe
+      - else
+        .btn.btn-secondary.btn-xs.btn-requisite-info.left.disabled
+          .fa.fa-fw.fa-arrow-circle-right

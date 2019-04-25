@@ -1,0 +1,19 @@
+.main_container
+  .col-md-3
+  .col-md-6
+    .right_col role="main" style=("min-height: 851px;margin-top: 60px;")
+      h3 Olá, <strong>#{@form.invitation.name}</strong> você foi convidado(a) para atuar como <strong>#{I18n.t("views.profile.roles.#{@form.invitation.role}")}</strong> no projeto <strong>#{@form.invitation.project.name}</strong>
+      p Para processeguir defina uma senha e será automaticamente redirecionado(a) ao projeto.
+      = simple_form_for @form, url: @form.url do |f|
+        = f.input :name, label: 'Nome', hint: 'Verifique se o nome está correto'
+        = f.input :email, input_html: { disabled: true }
+        = f.input :password, hint: 'No mínimo de 6 dígitos'
+        = f.input :password_confirmation, hint: 'No mínimo de 6 dígitos'
+        = f.input :accept, as: :boolean
+        = f.submit 'Aceitar convite', class: 'btn btn-primary'
+  .col-md-3
+
+css:
+  .right_col {
+    margin-left: 0px !important;
+  }

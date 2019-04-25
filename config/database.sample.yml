@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: tcc_development
+  pool: <%= ENV["DB_POOL"] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: tcc_test
+  pool: <%= ENV["DB_POOL"] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: localhost
+
+production:
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] %>
+
+staging:
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] %>

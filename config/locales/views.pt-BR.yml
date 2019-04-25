@@ -1,0 +1,47 @@
+pt-BR:
+  views:
+    permission:
+      actions:
+        read: Leitura
+        write: Escrita
+        create: Criação
+      entities:
+        project: Projeto
+    profile:
+      roles:
+        owner: Dono
+        manager: Gestor
+        collaborator: Colaborador
+        member: Membro
+    invitation:
+      pending: Pendente
+      accepted: Aceita
+      rejected: Rejeitada
+    project:
+      pending: Criado
+      created: Criado
+      finished: Finalizado
+    requisite:
+      kinds:
+        functional: Funcional
+        not_functional: Não Funcional
+      priorities:
+        high: Alta
+        medium: Média
+        low: Baixa
+      states:
+        proposed: Proposto
+        under_evaluation: Em avaliação
+        approved: Aprovado
+        rejected: Rejeitado
+        implemented: Implementado
+        tested: Testado
+        concluded: Concluído
+      states_action:
+        propose: Proposto
+        under_evaluation: Em avaliação
+        approve: Aprovado
+        reject: Rejeitado
+        implement: Implementado
+        test: Testado
+        conclude: Concluído

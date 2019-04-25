@@ -1,0 +1,53 @@
+= content_for :current_menu do 'project' end
+div
+  .page-title
+    .title_left
+      h3 Meus projetos
+    .title_right
+
+  .row
+    .col-md-12
+      .x_panel
+        .x_content style=("display: block;")
+          - if @projects.any?
+            table.table.table-striped.projects
+              thead
+                tr
+                  th style=("width: 20%") Nome
+                  th Membros
+                  th Progresso
+                  th Status
+                  th style=("width: 20%") Ações
+              tbody
+                - @projects.each do |project|
+                  tr
+                    td
+                      a = project.name
+                      br
+                      small = "Criado em #{ project.created_at.strftime('%d/%m/%Y') }"
+                    td
+                      ul.list-inline
+                        - project.users.each do |user|
+                          li
+                            = image_tag user.gravatar_url, class: 'avatar', title: user.name
+                    td.project_progress
+                      .progress
+                        .progress-bar role="progressbar" style="width:#{project.decorate.conclusion_percentage}"
+                          span = project.decorate.conclusion_percentage
+                    td
+                      h5
+                        .label class=("label-#{project.decorate.status_label}")
+                          = project.decorate.status
+                    td
+                      - if can? :read, project
+                        = link_to project_choice_path(project), method: :post, class: 'btn btn-primary btn-xs', title: 'Visualizar' do
+                          i.fa.fa-eye
+                      - if can? :update, project
+                        = link_to edit_project_path(project), class: 'btn btn-info btn-xs', title: 'Editar' do
+                          i.fa.fa-pencil
+                      - if can? :delete, project
+                        = link_to project_path(project), class: 'btn btn-danger btn-xs', title: 'Remover',
+                          method: :delete, data: { confirm: 'Deseja realmente excluir esse projeto? Todos os dados serão perdidos.'} do
+                          i.fa.fa-trash-o
+          - else
+            h2 Não há projetos cadastrados. você pode cadastrar um novo projeto <strong>#{link_to 'clicando aqui', new_project_path}</strong>

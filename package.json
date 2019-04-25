@@ -1,0 +1,24 @@
+{
+  "name": "sinfeger",
+  "private": true,
+  "dependencies": {
+    "gentelella": "^1.4.0",
+    "malihu-custom-scrollbar-plugin": "^3.1.5"
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/KarineAlmeidaSilva/tcc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/KarineAlmeidaSilva/tcc#readme"
+}

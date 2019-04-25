@@ -1,0 +1,9 @@
+= simple_form_for @project do |f|
+  = f.input :name
+  = f.input :acronyms
+  = f.input :description
+  = f.input :conclusion_date, as: :string, input_html: { data: { inputmask: "'mask': '99/99/9999'" }, value: f.object.conclusion_date.try(:strftime, '%d/%m/%Y') }
+  = f.input :email
+  = f.input :site
+
+  = f.button :submit, class: 'btn btn-primary'

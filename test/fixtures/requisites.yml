@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slg: MyString
+  kind: MyString
+  title: MyString
+  description: MyText
+  state: MyString
+  author_id: MyString
+  responsable_id: MyString
+  project: one
+
+two:
+  slg: MyString
+  kind: MyString
+  title: MyString
+  description: MyText
+  state: MyString
+  author_id: MyString
+  responsable_id: MyString
+  project: two

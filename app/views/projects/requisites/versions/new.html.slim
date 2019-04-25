@@ -1,0 +1,15 @@
+= content_for :current_menu do 'requisite' end
+.alert.alert-info style="margin-top: 70px;"
+  | Ao editar um requisito uma nova versão será salva. É possível acompanhar as diversas versões do ciclo de vida do requisito
+  strong
+    =<> link_to project_requisite_versions_path(@form.requisite.project, @form.requisite) do
+      span style="color: #fff" clicando aqui
+
+= simple_form_for @form, url: @form.url do |f|
+  = f.input :title
+  = f.input :slg
+  = f.input :description, as: :text
+  = f.input :kind, as: :select, collection: Requisite::KINDS, prompt: "Selecione um tipo"
+  = f.input :priority, as: :select, collection: I18n.t('views.requisite.priorities').invert, prompt: "Selecione a prioridade"
+
+  = f.button :submit, 'Atualizar requisito', class: 'btn btn-primary'

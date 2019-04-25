@@ -1,0 +1,8 @@
+= simple_form_for [current_user.current_project, @requisite] do |f|
+  = f.input :title
+  = f.input :slg
+  = f.input :description
+  = f.input :kind, as: :select, collection: Requisite::KINDS, prompt: "Selecione um tipo"
+  = f.input :priority, as: :select, collection: I18n.t('views.requisite.priorities').invert, prompt: "Selecione a prioridade"
+
+  = f.button :submit, class: 'btn btn-primary'

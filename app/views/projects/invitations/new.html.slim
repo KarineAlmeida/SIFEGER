@@ -1,0 +1,17 @@
+= content_for :current_menu do 'member' end
+div
+  .page-title
+    .title_left
+      h3 #{@form.project.name} / Convidar usuário
+  .row
+    .col-md-12
+      .x_panel
+        .x_content
+          = simple_form_for @form, url: @form.url do |f|
+            .row
+              .col-md-6
+                = f.input :name
+                = f.input :email
+                = f.input :role, label: 'Perfil', collection: @form.available_profiles, prompt: 'Selecione um perfil'
+
+            = f.button :submit, 'Convidar usuário', class: 'btn btn-primary'

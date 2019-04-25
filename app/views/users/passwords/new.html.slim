@@ -1,0 +1,20 @@
+.col-md-4.col-md-offset-4.col-xs-8.col-xs-offset-2
+  .auth-logo.text-center
+    .brand
+      = image_tag('sifeger_logo.png', style: 'width: 300px')
+  #wrapper
+    #login.animate.form
+      section.login_content style="margin-top:60px;"
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          h1 Esqueceu sua senha?
+          div
+            = f.email_field :email, autofocus: true, placeholder: "Email", class: 'form-control'
+            div
+              .row
+                .col-md-4
+                  = f.submit "Enviar instruções para redefinir a senha", class: 'btn btn-primary'
+            .clearfix
+            .separator
+              p.change_link
+                =<> link_to 'Login', new_user_session_path
+                =<> link_to 'Cadastro', new_user_registration_path

@@ -1,0 +1,23 @@
+.col-md-4.col-md-offset-4.col-xs-8.col-xs-offset-2
+  .auth-logo.text-center
+    .brand
+      = image_tag('sifeger_logo.png', style: 'width: 300px')
+  #wrapper
+    #login.animate.form
+      section.login_content.new style="margin-top:60px;"
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          h1 Novo usuário
+          div
+            = f.input :name
+            = f.input :email
+            = f.input :password
+            = f.input :password_confirmation
+            div
+              .row
+                .col-md-4
+                  = f.submit "Cadastrar", class: 'btn btn-primary btn-block'
+            .clearfix
+            .separator
+              p.change_link
+                | Já possui usuário?
+                =<> link_to 'Logar', new_user_session_path

@@ -1,0 +1,15 @@
+//= require activeadmin_addons/all
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+$skinActiveColor: #db8438;
+$skinHeaderBck: #301d0c;
+$panelHeaderBck: #301d0c;
+
+@import "active_skin";
+
+
+#buscou-_sidebar_section {
+  display: none;
+}

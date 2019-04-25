@@ -1,0 +1,10 @@
+#requisite-alert-status-change.modal.fade tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title Alerta
+      .modal-body
+        h4 Está certo que deseja alterar o estado desse requisito?
+      .modal-footer
+        .btn.btn-secondary data-dismiss="modal" type="button" Fechar
+        = link_to 'Confirmar', '', class: 'btn btn-primary btn-confirm', data: { remote: true, dismiss: 'modal' }, method: :patch

@@ -1,0 +1,6 @@
+= simple_form_for(@form, url: @form.url, method: :patch ) do |f|
+  = f.input :name, disabled: true
+  = f.input :email, disabled: true
+  = f.input :role, collection: @form.available_profiles, prompt: false
+
+  = f.button :submit, 'Atualizar', class: 'btn btn-primary'

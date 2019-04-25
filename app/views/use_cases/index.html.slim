@@ -1,0 +1,19 @@
+= content_for :current_menu do 'use_case' end
+
+
+ul#myTab.nav.nav-tabs role="tablist"
+  li.nav-item
+    a#members-tab.nav-link.active data-toggle="tab" href="#use-cases" role="tab" data-anchor-url="use-cases"
+      .fa.fa-fw.fa-list
+      =<> 'Casos de uso'
+
+#myTabContent.tab-content
+  #use-cases.tab-pane.fade role="tabpanel" style="position: relative"
+    div style="position:absolute; top: -42px;right: -4px; z-index: 9999"
+      .btn.btn-primary
+        i.fa.fa-plus &nbsp;  Criar caso de uso
+    .row
+      .col-md-12
+        .x_panel
+          .x_content style=("display: block;")
+            h4 Não há casos de uso cadastrados. Você pode cadastrar um novo <strong>clicando aqui</strong>.

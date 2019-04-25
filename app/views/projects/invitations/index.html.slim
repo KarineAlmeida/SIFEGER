@@ -1,0 +1,74 @@
+= content_for :current_menu do 'member' end
+
+ul#myTab.nav.nav-tabs role="tablist"
+  li.nav-item
+    a#members-tab.nav-link data-toggle="tab" href="#members" role="tab" data-anchor-url="members"
+      .fa.fa-fw.fa-user-o
+      =<> 'Membros'
+  li.nav-item
+    a#invites-tab.nav-link data-toggle="tab" href="#invites" role="tab" data-anchor-url="invites"
+      .fa.fa-fw.fa-envelope-o
+      =<> 'Convites'
+#myTabContent.tab-content
+  #members.tab-pane.fade role="tabpanel"
+    .row
+      .col-md-12
+        .x_panel
+          .x_content style=("display: block;")
+            - if @profiles.any?
+              table.table.table-striped.projects.datatable
+                thead
+                  tr
+                    th style=("width: 200px") Nome
+                    th style=("width: 20%") Email
+                    th Status
+                    th Perfil
+                    th Ação
+                tbody
+                  - @profiles.each do |profile|
+                    tr
+                      td
+                        a = profile.user_name
+                      td = profile.user.email
+                      td
+                        | Ativo
+                      td
+                        = I18n.t("views.profile.roles.#{profile.role}")
+                      td
+                        - if can? :update, profile
+                          = link_to edit_project_profile_path(current_user.current_project, profile), class: 'btn btn-info btn-xs', title: 'Editar' do
+                            i.fa.fa-pencil
+
+  #invites.tab-pane.fade role="tabpanel"
+    .row
+      .col-md-12
+          .x_panel
+            .x_content style=("display: block;")
+              div style="position:absolute; top: -59px;right: -22px;"
+                - if can? :create, Invitation
+                  = link_to new_project_invitation_path(@project), class: 'btn btn-primary' do
+                    i.fa.fa-plus &nbsp;  Convidar membro
+              - if @invitations.any?
+                table.table.table-striped.projects.datatable
+                  thead
+                    tr
+                      th style=("width: 300px") Nome do usuário
+                      th Status
+                      th Email
+                      th Perfil
+                      th Convidado por
+                      th Ações
+                  tbody
+                    - @invitations.each do |invitation|
+                      tr
+                        td = invitation.name
+                        td = I18n.t("views.invitation.#{invitation.status}")
+                        td = invitation.email
+                        td = I18n.t("views.profile.roles.#{invitation.role}")
+                        td = invitation.invited_by.name
+                        td
+                          = link_to project_invitation_path(invitation.project, invitation), class: 'btn btn-xs btn-danger',
+                            data: { confirm: 'Deseja cancelar esse convite?' }, method: :delete do
+                            .fa.fa-trash
+              - else
+                h3 Não há convites pendentes

@@ -1,0 +1,19 @@
+doctype html
+html lang="pt-BR"
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+    meta charset="utf-8"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    title Sifeger
+
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+  body.nav-md
+    .container.body
+      .main_container
+        .right_col role="main"
+          .flashes-wrapper
+            = render partial: 'shared/flashes'
+          = yield
+    = javascript_include_tag 'application'

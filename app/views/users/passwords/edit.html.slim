@@ -1,0 +1,14 @@
+.col-md-4.col-md-offset-4.col-xs-8.col-xs-offset-2
+  #wrapper
+    #login.animate.form
+      section.login_content.new style="margin-top:60px;"
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), method: :patch ) do |f|
+          h1 Trocar senha
+          div
+            = f.input :reset_password_token, as: :hidden
+            = f.input :password
+            = f.input :password_confirmation
+            div
+              .row
+                .col-md-4
+                  = f.submit "Submeter", class: 'btn btn-primary btn-block'

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  token: MyString
+  project: one
+  invited_by_id: MyString
+  profile: one
+
+two:
+  token: MyString
+  project: two
+  invited_by_id: MyString
+  profile: two

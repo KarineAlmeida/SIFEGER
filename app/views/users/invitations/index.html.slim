@@ -1,0 +1,42 @@
+div
+  .page-title
+    .title_left
+      h3 Convites
+  .clearfix
+  .row
+    .col-md-12
+      .x_panel
+        .x_content style=("display: block;")
+          - if @invitations.any?
+            table.table.table-striped.projects
+              thead
+                tr
+                  th style=("width: 20%") Dono do projeto
+                  th style=("width: 20%") Nome do projeto
+                  th style=("width: 20%") Seu cargo
+                  th Convidado por
+                  th Criado em
+                  th Ações
+              tbody
+                - @invitations.each do |invitation|
+                  td
+                    = invitation.project.owner.name
+                  td
+                    = invitation.project.name
+                  td
+                    = I18n.t("views.profile.roles.#{invitation.role}")
+                  td
+                    = invitation.invited_by.name
+                  td
+                    = I18n.l invitation.created_at, format: :long
+                  td
+                    = link_to users_invitation_statuses_path(invitation, status: :accept), method: :patch,
+                      class: 'btn btn-success btn-xs', data: { confirm: 'Deseja aceitar o convite?' } do
+                      .fa.fa-check
+                      =<> 'Aceitar'
+                    = link_to users_invitation_statuses_path(invitation, status: :reject), method: :patch,
+                      class: 'btn btn-danger btn-xs', data: { confirm: 'Deseja rejeitar o convite?' } do
+                      .fa.fa-close
+                      =<> 'Recusar'
+          - else
+            h3 Não há convites pendentes

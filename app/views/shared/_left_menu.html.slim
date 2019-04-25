@@ -1,0 +1,39 @@
+
+.col-md-3.left_col
+  .left_col.scroll-view
+    .navbar.nav_title style=("border: 0;")
+      .brand-custom
+        = link_to projects_path, class: 'site_title' do
+          = image_tag('sifeger_logo.png')
+          span =<> 'IFEGER'
+    .profile.clearfix
+      .profile_pic
+        = image_tag current_user.gravatar_url, class: 'img-circle profile_img'
+      .profile_info
+        span Bem vindo,
+        h2 = current_user.name
+    br/
+
+    #sidebar-menu.main_menu_side.hidden-print.main_menu
+      .menu_section.active
+        - if current_user.current_project
+          h3 Menu
+          ul.nav.side-menu
+            - if can? :read, current_user.current_project
+              li class=('current-page' if yield(:current_menu) == 'project')
+                = link_to project_path(current_user.current_project) + "#home" do
+                  i.fa.fa-file-powerpoint-o
+                  =<> current_user.current_project.name
+            - if can? :read, Profile
+              li class=('current-page' if yield(:current_menu) == 'member')
+                = link_to project_invitations_path(current_user.current_project) + "#members" do
+                  i.fa.fa-user-o
+                  | Membros
+            li class=('current-page' if yield(:current_menu) == 'requisite')
+              = link_to project_requisites_path(current_user.current_project) + "#kanban" do
+                i.fa.fa-check-square-o
+                | Requisitos
+            li class=('current-page' if yield(:current_menu) == 'use_case')
+              = link_to use_cases_path do
+                i.fa.fa-list
+                | Casos de uso

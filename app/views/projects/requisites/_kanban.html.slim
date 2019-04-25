@@ -1,0 +1,60 @@
+div style="position:absolute; top: 0px;right: 10px;"
+  - if can? :create, Requisite
+    = link_to new_project_requisite_path(current_user.current_project), class: 'btn btn-block btn-primary' do
+      i.fa.fa-plus &nbsp;  Criar requisito
+
+.kanban
+  .column.proposed
+    .title Proposto
+    .cards
+      - kanban_requisite_control.proposed.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+  .column.under_evaluation
+    .title Em Avaliação
+    .cards
+      - kanban_requisite_control.under_evaluation.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+  .column.rejected
+    .title Rejeitado
+    .cards
+      - kanban_requisite_control.rejected.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+  .column.approved
+    .title Aprovado
+    .cards
+      - kanban_requisite_control.approved.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+
+  .column.implemented
+    .title Implementado
+    .cards
+      - kanban_requisite_control.implemented.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+
+  .column.tested
+    .title Testado
+    .cards
+      - kanban_requisite_control.tested.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+  .column.concluded
+    .title Concluído
+    .cards
+      - kanban_requisite_control.concluded.each do |requisite|
+        = render partial: 'card', locals: { requisite: requisite }
+
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    windowHeight    = $(window).height();
+    scrollTop       = $(window).scrollTop(),
+    elementOffset   = $('.kanban').offset().top,
+    distance        = (elementOffset - scrollTop);
+    newColumnHeight = windowHeight - 250
+
+    $('.column').css('height', newColumnHeight + 'px');
+  });

@@ -1,0 +1,24 @@
+= content_for :current_menu do 'requisite' end
+
+.row
+  .col-md-12
+    ul#requisite-tab.nav.nav-tabs role="tablist"
+      li.nav-item.active
+        a.nav-link.kanban-link data-toggle="tab" href="#kanban" role="tab" data-anchor-url="kanban"
+          .fa.fa-fw.fa-th
+          =<> 'Kanban'
+      li.nav-item
+        a.nav-link.active.home-link data-toggle="tab" href="#home" role='tab' data-anchor-url="home"
+          .fa.fa-fw.fa-list
+          =<> 'Exibir em lista'
+    #requisite-tab-content.tab-content
+      #home.tab-pane role='tabpanel'
+        = render partial: 'index_table', locals: { requisites: @requisites }
+      #kanban.tab-pane role='tabpanel'
+        = render partial: 'kanban', locals: { kanban_requisite_control: @kanban_requisite_control }
+
+#requisite-responsable.modal.fade aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1"
+  = render partial: 'responsable_choice_form', locals: { responsable_choice_form: @responsable_choice_form }
+
+= render 'shared/modals/requisite_info'
+= render 'shared/modals/requisite_alert_status_change'

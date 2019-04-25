@@ -1,0 +1,3 @@
+h3 Olá, <strong>#{@invitation.name}</strong> você foi convidado(a) para atuar como <strong>#{I18n.t("views.profile.roles.#{@invitation.role}")}</strong> no projeto <strong>#{@invitation.project.name}</strong>
+
+| #{link_to 'Clique aqui', new_invitations_acceptances_url(token: @invitation.token)} para acessar a aplicação e definir sua senha.

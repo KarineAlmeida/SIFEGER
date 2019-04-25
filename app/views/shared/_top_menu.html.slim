@@ -1,0 +1,42 @@
+.top_nav
+  .nav_menu
+    nav
+      .nav.toggle
+        a#menu_toggle
+          i.fa.fa-bars
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            =<> current_project_label
+            b.caret
+          ul.dropdown-menu.alg-left
+            li
+              = link_to new_project_path do
+                .fa.fa-plus
+                =<> 'Novo projeto'
+            - if can? :read, Project
+              li
+                = link_to projects_path do
+                  .fa.fa-tasks
+                  =<> 'Meus projetos'
+            li.divider.n-0
+            - current_user_projects.each do |project|
+              li
+                = link_to project_choice_path(project), method: :post do
+                  .fa.fa-file-powerpoint-o
+                  =<> project.name
+      ul.nav.navbar-nav.navbar-right
+        li
+          a.user-profile.dropdown-toggle aria-expanded="false" data-toggle="dropdown" href="javascript:;"
+            = image_tag current_user.gravatar_url
+            => current_user.name
+            span.fa.fa-angle-down
+          ul.dropdown-menu.dropdown-usermenu.pull-right
+            li = link_to 'Perfil', edit_user_registration_path
+            li
+              = link_to users_invitations_path do
+                span.badge.bagde-light.pull-right = current_user.invitations.size
+                | Meus convites
+            li = link_to destroy_user_session_path, method: :delete do
+              i.fa.fa-sign-out.pull-right
+              | Sair

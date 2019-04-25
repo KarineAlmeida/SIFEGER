@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  object: 
+  requisite: one
+  requisite_log: one
+
+two:
+  object: 
+  requisite: two
+  requisite_log: two

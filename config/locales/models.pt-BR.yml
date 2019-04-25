@@ -1,0 +1,79 @@
+pt-BR:
+  attributes:
+    created_at: Criado em
+    updated_at: Atualizado em
+  activerecord:
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+      project:
+        one: Projeto
+        other: Projetos
+      permission:
+        one: Permissão
+        other: Permissões
+      requisite:
+        one: Requisito
+        other: Requisitos
+    attributes:
+      project:
+        name: Nome
+        acronyms: Sigla
+        description: Descrição
+        conclusion_date: Data de finalização
+        status: Status
+        email: E-mail
+        site: Site
+      permission:
+        action: Ação
+        entity: Entidade
+      user:
+        name: Nome
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirmação da senha
+        permissions: Permissões
+        current_password: Senha atual
+      requisite:
+        slg: Sigla
+        title: Título
+        kind: Tipo
+        description: Descrição
+        state: Estado
+        author: Autor
+        responsable: Responsável
+        project: Projeto
+        created_at: Criado em
+        updated_at: Atualizado em
+        priority: Prioridade
+  activemodel:
+    attributes:
+      invitation_form:
+        email: E-mail
+        role: Perfil
+        name: Nome
+      invitation/acceptance_form:
+        name: Nome
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirmação de senha
+        accept: Aceito os termos de uso
+      user/profile_update_form:
+        name: Nome
+        email: E-mail
+        role: Perfil
+      requisite_version_form:
+        slg: Sigla
+        title: Título
+        kind: Tipo
+        description: Descrição
+        state: Estado
+        author: Autor
+        responsable: Responsável
+        project: Projeto
+        created_at: Criado em
+        updated_at: Atualizado em
+        priority: Prioridade
+      requisite/responsable_choice_form:
+        responsable_id: Responsável
